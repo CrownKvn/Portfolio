@@ -1,0 +1,323 @@
+/* Portrait and page motion inspired by the supplied Malmi portfolio. */
+.profile-card {
+  position: relative;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.65, 0.3, 1),
+    border-color 0.25s,
+    box-shadow 0.25s;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+}
+.profile-card.is-tilting {
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--border));
+  box-shadow: 0 24px 55px -18px color-mix(in srgb, var(--accent) 27%, transparent);
+}
+.profile-image {
+  background: radial-gradient(ellipse at 50% 65%, #4c125f, #200728 78%);
+}
+.profile-image img {
+  width: 82%;
+  height: 100%;
+  margin-inline: auto;
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 48% 48% 0 0;
+  transform: translateX(var(--portrait-x, 0px));
+  filter: saturate(0.85);
+  mask-image: linear-gradient(#000 72%, transparent 99%);
+  animation: portrait-float 6s ease-in-out infinite paused;
+}
+.profile-ring {
+  width: 74%;
+  max-width: 275px;
+  height: auto;
+  aspect-ratio: 1;
+  top: 46%;
+  border: 0;
+  background: linear-gradient(145deg, #af43c6, #4c156b);
+  opacity: 0.85;
+  box-shadow:
+    0 20px 50px #bc45d54d,
+    inset 0 0 42px #e39ef633;
+}
+.profile-orbit {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 91%;
+  max-width: 335px;
+  aspect-ratio: 1;
+  border: 5px solid #d97cec55;
+  border-top-color: #ed9afb;
+  border-right-color: transparent;
+  border-bottom-color: #a53abd;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: portrait-orbit 18s linear infinite paused;
+  pointer-events: none;
+}
+.profile-dot-grid {
+  position: absolute;
+  left: 12px;
+  bottom: 29px;
+  width: 55px;
+  height: 65px;
+  background: radial-gradient(circle, #d77cea55 1px, transparent 1.5px) 0 0/9px 9px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.profile-spark {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #e599f2;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  z-index: 3;
+  animation: portrait-twinkle 3.4s ease-in-out infinite paused;
+  pointer-events: none;
+}
+.spark-a {
+  top: 35px;
+  right: 20px;
+}
+.spark-b {
+  left: 20px;
+  top: 49%;
+  width: 8px;
+  height: 8px;
+  animation-delay: 1.2s;
+}
+.profile-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(
+    circle at var(--glow-x, 50%) var(--glow-y, 40%),
+    #f0b1ff24,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.profile-card.is-tilting .profile-image::before {
+  opacity: 1;
+}
+.image-status {
+  animation: badge-float-top 5.5s ease-in-out infinite paused;
+  box-shadow: 0 12px 28px -10px #0009;
+}
+.image-caption {
+  animation: badge-float-bottom 6.5s ease-in-out infinite paused;
+  box-shadow: 0 12px 28px -10px #0009;
+}
+.status-dot {
+  animation: status-pulse 2s ease-in-out infinite paused;
+}
+.marquee-track {
+  animation-duration: 26s;
+  animation-play-state: paused;
+}
+.motion-active .status-dot,
+.profile-card.motion-active .profile-image img,
+.profile-card.motion-active .profile-orbit,
+.profile-card.motion-active .profile-spark,
+.profile-card.motion-active .image-status,
+.profile-card.motion-active .image-caption,
+.stack-band.motion-active .marquee-track {
+  animation-play-state: running;
+}
+.stack-band.motion-active:hover .marquee-track,
+.stack-band.motion-active:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+.project-card {
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 42px -12px var(--glow);
+  }
+  .tech-card:hover .tech-icon,
+  .social-icons a:hover svg {
+    transform: translateY(-2px) scale(1.06);
+  }
+}
+.tech-icon,
+.social-icons a svg {
+  transition: transform 0.25s;
+}
+.pointer-aura {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e09efb44, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 60;
+  contain: layout style paint;
+}
+.pointer-aura.pointer-visible {
+  opacity: 1;
+}
+.motion-play {
+  display: none;
+}
+#motion-toggle[data-paused='true'] .motion-play {
+  display: block;
+}
+#motion-toggle[data-paused='true'] .motion-pause {
+  display: none;
+}
+#motion-toggle:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+@supports (background-clip: text) {
+  .hero h1 > span {
+    background: linear-gradient(100deg, #b65acb 10%, #f0acff 42%, #c35ce3 65%, #b65acb 90%);
+    background-size: 240% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: name-gradient 8s linear infinite paused;
+  }
+  .hero.motion-active h1 > span {
+    animation-play-state: running;
+  }
+}
+@keyframes portrait-orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes portrait-float {
+  0%,
+  100% {
+    translate: 0 4px;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+@keyframes portrait-twinkle {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(90deg);
+  }
+}
+@keyframes badge-float-top {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
+}
+@keyframes badge-float-bottom {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 5px;
+  }
+}
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 #43d59d44;
+  }
+  70% {
+    box-shadow: 0 0 0 6px #43d59d00;
+  }
+}
+@keyframes name-gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+/* The pause control and device preference cover existing motion too. */
+html[data-motion='off'] {
+  scroll-behavior: auto;
+}
+html[data-motion='off'] *,
+html[data-motion='off'] *::before,
+html[data-motion='off'] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-motion='off'] .profile-card,
+html[data-motion='off'] .tech-card,
+html[data-motion='off'] .project-card {
+  transform: none !important;
+}
+html[data-motion='off'] .pointer-aura {
+  display: none;
+}
+html.page-idle *,
+html.page-idle *::before,
+html.page-idle *::after {
+  animation-play-state: paused !important;
+}
+@media (hover: none), (pointer: coarse) {
+  .pointer-aura {
+    display: none;
+  }
+  .profile-card {
+    transform: none;
+  }
+}
+@media (max-width: 360px) {
+  .site-header .brand {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .profile-card,
+  .tech-card,
+  .project-card {
+    transform: none !important;
+  }
+  .pointer-aura {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  .pointer-aura,
+  #motion-toggle {
+    display: none !important;
+  }
+  .hero h1 > span {
+    color: #613078;
+    background: none;
+  }
+}

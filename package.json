@@ -1,0 +1,16 @@
+{
+  "name": "kirawnsan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Accessible static portfolio for GitHub Pages.",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node tests/validate.cjs && node tests/interactions.cjs"
+  },
+  "devDependencies": {
+    "css-tree": "3.1.0",
+    "jsdom": "26.1.0",
+    "prettier": "3.6.2"
+  }
+}

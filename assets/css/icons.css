@@ -1,0 +1,157 @@
+/* Reference-style skill tiles, with each technology driving its own glow. */
+@media screen {
+  .tech-grid {
+    gap: 16px;
+  }
+  .tech-card {
+    position: relative;
+    isolation: isolate;
+    min-height: 136px;
+    padding: 24px 12px 20px;
+    gap: 14px;
+    border-radius: 18px;
+    border-color: color-mix(in srgb, var(--tech) 32%, var(--border));
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--tech) 10%, var(--surface)),
+      var(--surface) 75%
+    );
+    box-shadow: 0 8px 24px -18px color-mix(in srgb, var(--tech) 55%, transparent);
+    transition:
+      transform 280ms cubic-bezier(0.2, 0.8, 0.3, 1),
+      border-color 220ms,
+      box-shadow 280ms;
+  }
+  .tech-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      ellipse at 50% 12%,
+      color-mix(in srgb, var(--tech) 22%, transparent),
+      transparent 75%
+    );
+    opacity: 0;
+    transition: opacity 240ms;
+    pointer-events: none;
+  }
+  .tech-icon {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: 1px solid color-mix(in srgb, var(--tech) 22%, transparent);
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--tech) 29%, var(--surface-2)),
+      color-mix(in srgb, var(--tech) 13%, var(--surface-2))
+    );
+    box-shadow:
+      inset 0 1px 0 #ffffff1f,
+      0 6px 17px -9px color-mix(in srgb, var(--tech) 55%, transparent);
+    transform-origin: 50% 65%;
+    transition:
+      transform 300ms cubic-bezier(0.2, 1.4, 0.4, 1),
+      background 220ms,
+      box-shadow 240ms;
+  }
+  .tech-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(135deg, #ffffff1a, transparent 55%);
+  }
+  .tech-card > span:last-child {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .tech-card:active {
+    border-color: var(--tech);
+    box-shadow: 0 10px 28px -16px var(--tech);
+  }
+  .tech-card:active .tech-icon {
+    transform: scale(1.08) rotate(-4deg);
+  }
+}
+@media screen and (hover: hover) and (pointer: fine) {
+  .tech-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--tech);
+    box-shadow:
+      0 18px 35px -17px color-mix(in srgb, var(--tech) 70%, transparent),
+      0 0 22px -12px var(--tech);
+  }
+  .tech-card:hover::before {
+    opacity: 1;
+  }
+  .tech-card:hover .tech-icon {
+    transform: translateY(-3px) scale(1.14) rotate(-6deg);
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--tech) 45%, var(--surface-2)),
+      color-mix(in srgb, var(--tech) 22%, var(--surface-2))
+    );
+    box-shadow:
+      inset 0 1px 0 #ffffff33,
+      0 8px 22px -7px color-mix(in srgb, var(--tech) 65%, transparent);
+    animation: skill-icon-pop 440ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
+  }
+}
+@keyframes skill-icon-pop {
+  0% {
+    transform: translateY(0) scale(1) rotate(0);
+  }
+  55% {
+    transform: translateY(-5px) scale(1.2) rotate(-9deg);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.14) rotate(-6deg);
+  }
+}
+@media screen and (max-width: 640px) {
+  .tech-grid {
+    gap: 12px;
+  }
+  .tech-card {
+    min-height: 124px;
+    padding: 20px 8px 16px;
+    gap: 12px;
+    border-radius: 16px;
+  }
+  .tech-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+  .tech-card > span:last-child {
+    font-size: 9px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .tech-grid {
+    gap: 9px;
+  }
+  .tech-card > span:last-child {
+    font-size: 8px;
+  }
+}
+html[data-motion='off'] .tech-card .tech-icon {
+  transform: none !important;
+  animation: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-card,
+  .tech-card .tech-icon {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .tech-card::before {
+    transition: none !important;
+  }
+}

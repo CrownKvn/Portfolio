@@ -1,0 +1,18 @@
+.filters,
+.command-trigger,
+#theme-toggle,
+#menu-toggle,
+.quick-answers-trigger,
+.hero-tool-links button,
+.project-tools,
+.save-project,
+.skills-toolbar,
+.skill-results-count,
+.contact-form,
+.project-links [data-project],
+.copy-email {
+  display: none;
+}
+.project-visual {
+  pointer-events: none;
+}

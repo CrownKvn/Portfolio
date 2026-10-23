@@ -1,0 +1,91 @@
+/* A short highlight travels around the Hire Me button's outline. */
+@property --hire-light-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.hero .hire-me {
+  position: relative;
+  isolation: isolate;
+  border-color: #ac57c977;
+  background: #120b20b3;
+  color: #f5efff;
+  box-shadow: 0 0 18px -12px #dc89ff;
+  transition:
+    transform 220ms,
+    background 220ms,
+    box-shadow 220ms,
+    border-color 220ms;
+}
+@supports (background: conic-gradient(from 0deg, transparent, #fff)) {
+  @supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+    .hire-me::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      padding: 2px;
+      border-radius: inherit;
+      pointer-events: none;
+      background: conic-gradient(
+        from var(--hire-light-angle),
+        transparent 0deg 255deg,
+        #bb56e4 282deg,
+        #fff2ff 302deg,
+        #e1a0ff 318deg,
+        transparent 344deg 360deg
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      animation: hire-light-lap 2.6s linear infinite paused;
+    }
+    .hero.motion-active .hire-me::after {
+      animation-play-state: running;
+    }
+  }
+}
+.hero .hire-me:hover,
+.hero .hire-me:focus-visible {
+  background: #351243b3;
+  border-color: #d88cef;
+  box-shadow: 0 6px 24px -9px #d88cef88;
+}
+.hire-me svg {
+  transition: transform 220ms;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero .hire-me:hover {
+    transform: translateY(-2px);
+  }
+  .hire-me:hover svg {
+    transform: translate(2px, -1px);
+  }
+}
+@keyframes hire-light-lap {
+  to {
+    --hire-light-angle: 360deg;
+  }
+}
+html[data-motion='off'] .hero .hire-me,
+html[data-motion='off'] .hire-me svg {
+  transform: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .hire-me,
+  .hire-me svg {
+    transform: none !important;
+  }
+  .hire-me::after {
+    animation: none !important;
+  }
+}
+@media print {
+  .hire-me::after {
+    display: none;
+  }
+}

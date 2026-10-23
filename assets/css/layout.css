@@ -1,0 +1,319 @@
+/* Match the supplied reference composition without fixing the page to one device. */
+@media screen {
+  :root {
+    --page-gutter: clamp(20px, 7.1vw, 112px);
+    --stack-height: 46px;
+  }
+  .section-shell,
+  .site-header {
+    width: calc(100% - var(--page-gutter) * 2);
+    max-width: 1280px;
+  }
+  .site-header {
+    top: 14px;
+    min-height: 56px;
+    padding: 8px 12px 8px 22px;
+    gap: 16px;
+  }
+  .site-header .brand {
+    flex-shrink: 0;
+  }
+  .nav-actions {
+    gap: 5px;
+  }
+  .hero {
+    height: auto;
+    min-height: calc(100svh - var(--stack-height));
+    max-height: none;
+    align-items: center;
+  }
+  .hero-inner {
+    padding-top: 100px;
+    padding-bottom: 38px;
+  }
+  .hero-copy {
+    width: min(100%, 640px);
+    max-width: 55%;
+  }
+  .hero-art {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 65% center;
+    mask-image: none;
+  }
+  .hero-shade {
+    background:
+      linear-gradient(90deg, #070816db 0%, #080916a8 30%, #0a091735 57%, #07091808 85%),
+      linear-gradient(0deg, #08091880, transparent 38%);
+  }
+  .hero-copy > .social-icons {
+    position: static;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 5.1vw, 76px);
+    letter-spacing: -1.6px;
+    margin-top: 26px;
+    line-height: 1.12;
+  }
+  .hero h1 > span {
+    display: inline;
+  }
+  .role-line {
+    font-size: clamp(17px, 1.8vw, 26px);
+    max-width: 100%;
+    min-height: 2.9em;
+    margin-top: 17px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  .hero-description {
+    font-size: clamp(15px, 1.3vw, 18px);
+    max-width: 550px;
+    line-height: 1.7;
+    margin-top: 6px;
+  }
+  .hero-actions {
+    margin-top: 27px;
+    gap: 16px;
+  }
+  .hero-tool-links {
+    margin-top: 18px;
+    gap: 12px 20px;
+  }
+  .stack-band {
+    height: var(--stack-height);
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  .marquee-track {
+    flex-shrink: 0;
+  }
+  .about-grid > *,
+  .project-grid > *,
+  .contact-grid > *,
+  .footer-grid > * {
+    min-width: 0;
+  }
+  .contact-email {
+    overflow-wrap: anywhere;
+  }
+  .profile-image {
+    height: auto;
+    aspect-ratio: 1.16;
+    background: radial-gradient(ellipse at 50% 45%, #35103f, #190620 80%);
+  }
+  .profile-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    border-radius: 0;
+    mask-image: none;
+    filter: none;
+    margin: 0;
+    z-index: 2;
+  }
+  .profile-ring {
+    width: 68%;
+    max-width: none;
+    top: 47%;
+  }
+  .profile-orbit {
+    width: 80%;
+    max-width: none;
+    top: 47%;
+  }
+  .image-status,
+  .image-caption {
+    z-index: 5;
+  }
+}
+@media screen and (min-width: 901px) and (max-height: 740px) {
+  .hero-inner {
+    padding-top: 90px;
+    padding-bottom: 25px;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 4.9vw, 68px);
+    margin-top: 20px;
+  }
+  .hero-copy > .social-icons {
+    margin-top: 16px;
+  }
+  .role-line {
+    margin-top: 13px;
+    min-height: 2.8em;
+  }
+  .hero-description {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    margin-top: 22px;
+  }
+  .hero-tool-links {
+    margin-top: 14px;
+  }
+}
+@media screen and (max-width: 1100px) {
+  :root {
+    --page-gutter: clamp(24px, 5vw, 55px);
+  }
+  .desktop-nav a {
+    padding-inline: 8px;
+  }
+  .site-header {
+    gap: 8px;
+    padding-left: 18px;
+  }
+  .hero-copy {
+    max-width: 59%;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 5.5vw, 60px);
+  }
+  .hero-description {
+    max-width: 450px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .menu-toggle span {
+    width: 16px;
+    height: 1px;
+    background: var(--muted);
+  }
+  .hero-copy {
+    max-width: 65%;
+  }
+  .hero-shade {
+    background: linear-gradient(90deg, #070816f0, #080916c9 43%, #0a091740 88%);
+  }
+  .hero h1 {
+    font-size: clamp(40px, 6.1vw, 54px);
+  }
+  .hero-description {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 640px) {
+  :root {
+    --page-gutter: 20px;
+    --stack-height: 42px;
+  }
+  .site-header {
+    top: 12px;
+    min-height: 54px;
+    padding: 8px 10px 8px 15px;
+    gap: 8px;
+  }
+  .site-header .brand {
+    font-size: 14px;
+  }
+  .nav-actions {
+    gap: 3px;
+  }
+  .nav-cta {
+    padding-inline: 11px;
+  }
+  .command-trigger {
+    display: none;
+  }
+  .hero {
+    min-height: calc(100svh - var(--stack-height));
+    align-items: flex-start;
+  }
+  .hero-art {
+    height: clamp(320px, 78vw, 460px);
+    object-position: 80% center;
+    mask-image: linear-gradient(#000 66%, transparent);
+  }
+  .hero-shade {
+    background: linear-gradient(0deg, #070918 0%, #070918f5 43%, #07091840 76%, #07091811);
+  }
+  .hero-inner {
+    padding-top: clamp(295px, 69vw, 405px);
+    padding-bottom: 32px;
+  }
+  .hero-copy {
+    width: 100%;
+    max-width: none;
+  }
+  .hero-copy > .availability {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+  .hero-copy > .social-icons {
+    position: absolute;
+    top: 88px;
+    left: var(--page-gutter);
+    flex-direction: column;
+    margin: 0;
+    gap: 10px;
+  }
+  .hero-copy > .social-icons a {
+    width: 36px;
+    height: 36px;
+  }
+  .hero h1 {
+    font-size: clamp(37px, 9.7vw, 58px);
+    margin-top: 19px;
+    letter-spacing: -1px;
+  }
+  .role-line {
+    font-size: clamp(15px, 3.8vw, 20px);
+    min-height: 2.9em;
+    margin-top: 14px;
+  }
+  .hero-description {
+    font-size: 14px;
+    max-width: none;
+    line-height: 1.75;
+  }
+  .hero-actions {
+    margin-top: 22px;
+    gap: 12px;
+  }
+  .hero-tool-links {
+    font-size: 9px;
+    gap: 10px 16px;
+  }
+  .contact-email {
+    font-size: clamp(12px, 3.6vw, 17px);
+  }
+}
+@media screen and (max-width: 360px) {
+  :root {
+    --page-gutter: 16px;
+  }
+  .site-header .brand {
+    font-size: 12px;
+  }
+  .nav-actions {
+    gap: 0;
+  }
+  .nav-cta {
+    font-size: 9px;
+    padding-inline: 9px;
+  }
+  .hero h1 {
+    font-size: 36px;
+  }
+}
